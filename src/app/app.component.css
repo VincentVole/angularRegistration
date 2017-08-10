@@ -1,0 +1,10 @@
+label{
+	display: block;
+}
+#yes, #no, #yeslabel, #nolabel, .errors{
+	display: inline;
+}
+
+.errors{
+	color: red;
+}

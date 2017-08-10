@@ -6,5 +6,20 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  submitted = false;
+  user = {
+  	firstName: '',
+  	lastName: '',
+  	email: '',
+  	password: '',
+  	confirm: '',
+  	street: '',
+  	unit: '',
+  	city: '',
+  	state: '',
+  	lucky: ""
+  };
+  submit(){
+  	this.submitted = true;
+  }
 }

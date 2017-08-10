@@ -1,20 +1,106 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
+<div>
   <h1>
-    Welcome to {{title}}!
+    Registration
   </h1>
-  <img width="300" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxOS4xLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHZpZXdCb3g9IjAgMCAyNTAgMjUwIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAyNTAgMjUwOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPg0KCS5zdDB7ZmlsbDojREQwMDMxO30NCgkuc3Qxe2ZpbGw6I0MzMDAyRjt9DQoJLnN0MntmaWxsOiNGRkZGRkY7fQ0KPC9zdHlsZT4NCjxnPg0KCTxwb2x5Z29uIGNsYXNzPSJzdDAiIHBvaW50cz0iMTI1LDMwIDEyNSwzMCAxMjUsMzAgMzEuOSw2My4yIDQ2LjEsMTg2LjMgMTI1LDIzMCAxMjUsMjMwIDEyNSwyMzAgMjAzLjksMTg2LjMgMjE4LjEsNjMuMiAJIi8+DQoJPHBvbHlnb24gY2xhc3M9InN0MSIgcG9pbnRzPSIxMjUsMzAgMTI1LDUyLjIgMTI1LDUyLjEgMTI1LDE1My40IDEyNSwxNTMuNCAxMjUsMjMwIDEyNSwyMzAgMjAzLjksMTg2LjMgMjE4LjEsNjMuMiAxMjUsMzAgCSIvPg0KCTxwYXRoIGNsYXNzPSJzdDIiIGQ9Ik0xMjUsNTIuMUw2Ni44LDE4Mi42aDBoMjEuN2gwbDExLjctMjkuMmg0OS40bDExLjcsMjkuMmgwaDIxLjdoMEwxMjUsNTIuMUwxMjUsNTIuMUwxMjUsNTIuMUwxMjUsNTIuMQ0KCQlMMTI1LDUyLjF6IE0xNDIsMTM1LjRIMTA4bDE3LTQwLjlMMTQyLDEzNS40eiIvPg0KPC9nPg0KPC9zdmc+DQo=">
+ <h2>Account Information</h2>
+ <p *ngIf='submitted'>Thank you, {{user.firstName}}. Your form has been submitted.</p>
+ <form action="">
+   <fieldset>
+     <label for="firstName">*First Name:</label>
+     <input  style="display: inline" type="text" name="firstName" id="firstName"
+      required
+      [(ngModel)]='user.firstName'
+      #firstName='ngModel'
+     >
+     <p *ngIf="!firstName.valid" class="errors">First name is required.</p>
+
+     <label for="lastName">*Last Name:</label>
+     <input type="text" name="lastName" id="lastName"
+      required
+      [(ngModel)]='user.lastName'
+      #lastName='ngModel'
+     >
+     <p *ngIf="!lastName.valid" class="errors">Last name is required.</p>
+
+     <label for="email">*Email:</label>
+     <input type="email" name="email" id="email"
+      email
+      required
+      [(ngModel)]='user.email'
+      #email='ngModel'
+     >
+      <div *ngIf="email.errors" style="display: inline">
+        <p *ngIf="!email.valid && email.errors['required']" class="errors">Email is required</p>
+        <p *ngIf="!email.valid && email.errors['email'] && !email.errors['required']" class="errors">Email must be valid.</p>
+      </div>
+
+     <label for="password">*Password:</label>
+     <input type="password" name="password" id="password"
+      required
+      minlength='16'
+      [(ngModel)]='user.password'
+      #password='ngModel'
+     >
+      <div *ngIf="password.errors" style="display: inline">
+        <p *ngIf="!password.valid && password.errors['required']" class="errors">Password is required</p>
+        <p *ngIf="!password.valid && password.errors['minlength']" class="errors">Password must be at least 16 characters long.</p>
+      </div>
+
+     <label for="confirm">*Password Confirmation:</label>
+     <input type="password" name="confirm" id="confirm"
+      [(ngModel)]='user.confirm'
+      #confirm='ngModel'
+     >
+      <p *ngIf="user.password != user.confirm" class="errors">Passwords do not match.</p>
+
+     <label for="street">*Street Address</label>
+     <input type="text" name="street" id="street"
+      required
+      [(ngModel)]='user.street'
+      #street='ngModel'
+     >
+     <p *ngIf="!street.valid" class="errors">Street Address is required.</p>
+
+     <label for="unit">Unit/Apt #</label>
+     <input type="text" name="unit" id="unit"
+      [(ngModel)]='user.unit'
+     >
+
+     <label for="city">City</label>
+     <input type="text" name="city" id="city"
+      required
+      [(ngModel)]='user.city'
+      #city='ngModel'
+     >
+     <p *ngIf="!city.valid" class="errors">City is required.</p>
+
+     <label for="state">*State</label>
+     <select name="state" id="state">
+       <option value="1">State 1</option>
+       <option value="2">State 2</option>
+       <option value="3">State 3</option>
+     </select>
+
+
+     <label for="">*I'm feeling lucky</label>
+     <label for="yes" id="yeslabel">Yes</label>
+     <input type="radio" name="lucky" id="yes" value="Yes"
+        [(ngModel)] = 'user.lucky'
+        #lucky="ngModel"
+        required
+     >
+     <label for="no" id="nolabel">No</label>
+     <input type="radio" name="lucky" id="no" value="No"
+        [(ngModel)] = 'user.lucky'
+        required
+        #lucky = "ngModel"
+     >
+     <p *ngIf="!lucky.valid" class="errors">Are you lucky? Punk?</p>
+    </fieldset>
+   <button disabled *ngIf="firstName.errors || lastName.errors || email.errors || password.errors || street.errors || city.errors || lucky.errors || (user.password != user.confirm)">Register</button>
+   <button *ngIf="!firstName.errors && !lastName.errors && !email.errors && !password.errors && !street.errors && !city.errors && !lucky.errors && (user.password == user.confirm)" (click)="submit()">Register</button>
+ </form>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" href="https://blog.angular.io//">Angular blog</a></h2>
-  </li>
-</ul>
+
 
